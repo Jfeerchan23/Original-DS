@@ -7,8 +7,9 @@
  * and open the template in the editor.
  */
 
-package agenda2;
+package agenda;
 
+import agenda.Listado;
 import javax.swing.UIManager;
 
 /**
@@ -32,11 +33,8 @@ public class Main {
         } catch (Exception anyException) {
         }
         
-        //agregamos dos contactos de prueba
-        String[] c1={"Juan", "Perez","Masculino","Fijo","051233525"};
-        String[] c2={"Maria", "Gonzales","Femenino","Celular","0981234567"};
-        MiAgenda.agenda.add(c1);
-        MiAgenda.agenda.add(c2);
+         MiAgenda Inicio = new MiAgenda();
+   
         //instanciamos listado
         new Listado().setVisible(true);
         //llenamos la lista con datos en MiAgenda

@@ -1,20 +1,18 @@
 /*
- * Listado.java
- *
- * Created on 19 de diciembre de 2007, 3:19
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
-package agenda2;
+package agenda;
 
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-
 /**
  *
- * @author  Cristian Riffo Huez
+ * @author fer_c
  */
 public class Listado extends javax.swing.JFrame {
     
@@ -348,17 +346,21 @@ public class Listado extends javax.swing.JFrame {
         
     }
     
+    
+    
+    
+    
     void buscar(){
         //Si textfield vacio recargamos agenda
         if(txtBuscar.getText().length()==0){
             mostrarContactos();
         } else{
-            Iterator it = MiAgenda.agenda.iterator();
+            Iterator it = MiAgenda.getContactosIterador();
             DefaultListModel newmodelo= new DefaultListModel(), modelo= new DefaultListModel();
             //cargamos datos de agenda para filtrar
             while (it.hasNext()) {
                 String contacto[]=(String[]) it.next();
-                modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]);
+                modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]+"|"+contacto[5]);
             }
             //nuevo modelo luego de filtrar
             String res = null;
@@ -379,7 +381,7 @@ public class Listado extends javax.swing.JFrame {
         //limpiar lista para mostrarla filtrada
         lista.removeAll();
         DefaultListModel modelo = new DefaultListModel();
-        Iterator i = MiAgenda.agenda.iterator();
+          Iterator  i = MiAgenda.getContactosIterador();
         String genero = null, fono= null;
         int queGenero=0, queFono=0;
         //usamos flags para filtrar por gereno y fono
@@ -424,19 +426,19 @@ public class Listado extends javax.swing.JFrame {
                 if(fono.compareTo(contacto[3])==0){
                     if(genero.compareTo("todos")!=0){
                         if(genero.compareTo(contacto[2])==0){
-                            modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]);
+                            modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]+"|"+contacto[5]);
                         }
                     } else{
-                        modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]);
+                        modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]+"|"+contacto[5]);
                     }
                 }
             } else{
                 if(genero.compareTo("todos")!=0){
                     if(genero.compareTo(contacto[2])==0){
-                        modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]);
+                        modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]+"|"+contacto[5]);
                     }
                 } else{
-                    modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]);
+                    modelo.addElement(contacto[0]+" "+contacto[1]+" | "+contacto[3]+" | "+contacto[4]+"|"+contacto[5]);
                 }
             }
         }
