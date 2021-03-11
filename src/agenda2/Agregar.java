@@ -1,20 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package agenda;
-
-/**
+ * Agregar.java
  *
- * @author fer_c
+ * Created on 19 de diciembre de 2007, 3:13
  */
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+package agenda2;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -55,8 +46,6 @@ public class Agregar extends javax.swing.JFrame {
         tipoFono = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jLabel7 = new javax.swing.JLabel();
-        correo = new javax.swing.JTextField();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,24 +57,20 @@ public class Agregar extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jLabel1.setText("Nombre");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
             }
         });
-        
-        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 70, -1));
 
-        jPanel1.add(apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 70, -1));
-        jPanel1.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 70, -1));
+        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 70, -1));
+
+        jPanel1.add(apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 70, -1));
 
         jLabel2.setText("Apellido");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
-        
-          jLabel7.setText("Correo");
-       jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70,  -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         jLabel3.setText("Genero");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
@@ -121,8 +106,6 @@ public class Agregar extends javax.swing.JFrame {
 
         tipoFono.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "[Seleccione]", "Fijo", "Celular" }));
         jPanel1.add(tipoFono, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
-        
-  
 
         jButton1.setText("Agregar Contacto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -155,27 +138,24 @@ public class Agregar extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)   {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // TODO add your handling code here:
-    //Consultamos si ha llenado los datos
-    if(nombre.getText().length()==0 || numeroFono.getText().length()==0 || correo.getText().length()==0){
-        JOptionPane.showMessageDialog(null, "Complete el formulario", "Error!", 2);
-    } else{
-        //agregamos los datos a la agenda
-        Contacto datos= new Contacto(nombre.getText(), apellido.getText(), generoElegido,
-            tipoFono.getSelectedItem().toString(), numeroFono.getText(),correo.getText());
-        //Se agrega contacto al archivo CSV
-        MiAgenda.agregarContacto(datos,0);
-        //Limpiamos formulario
-        nombre.setText("");
-        apellido.setText("");
-        femenino.setSelected(true);
-        masculino.setSelected(false);
-        numeroFono.setText("");
-        tipoFono.setSelectedIndex(0);
-        correo.setText("");
-    }
-  }//GEN-LAST:event_jButton1ActionPerformed
+        //Consultamos si ha llenado los datos
+        if(nombre.getText().length()==0 || numeroFono.getText().length()==0){
+            JOptionPane.showMessageDialog(null, "Complete el formulario", "Error!", 2);
+        } else{
+            //agregamos los datos a la agenda
+            String[] datos={nombre.getText(), apellido.getText(), generoElegido, tipoFono.getSelectedItem().toString(), numeroFono.getText()};
+            MiAgenda.agenda.add(datos);
+            //Limpiamos formulario
+            nombre.setText("");
+            apellido.setText("");
+            femenino.setSelected(true);
+            masculino.setSelected(false);
+            numeroFono.setText("");
+            tipoFono.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void masculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masculinoActionPerformed
 // TODO add your handling code here:
@@ -201,7 +181,6 @@ public class Agregar extends javax.swing.JFrame {
             }
         });
     }
- 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
@@ -220,8 +199,6 @@ public class Agregar extends javax.swing.JFrame {
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField numeroFono;
     private javax.swing.JComboBox tipoFono;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField correo;
     // End of variables declaration//GEN-END:variables
     
 }
